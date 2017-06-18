@@ -10,11 +10,12 @@ defmodule Identicon.Image do
 
     - `hex` to hold list of hash values
     - `color` to store the RGB value
-    - `grid` to store the built indexed grid
+    - `grid` to store even hexed values at index
+    - `pixel_map` to store the built 50px block map squared from `grid` 
     ```
     %Identicon.Image{color: ..., hex: ..., grid: ...}
     ```
   """
-  defstruct hex: nil, color: nil, grid: nil
+  defstruct hex: nil, color: nil, grid: nil, pixel_map: nil
 
 end

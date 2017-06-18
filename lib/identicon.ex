@@ -22,6 +22,7 @@ defmodule Identicon do
     |> pick_color
     |> build_grid
     |> filter_odd_squares
+    |> build_pixel_grid
   end
 
   @doc """
@@ -118,6 +119,31 @@ defmodule Identicon do
       end)
 
     %Identicon.Image{image | grid: grid}
+  end
+
+
+  @doc """
+    `build_pixel_grid` ...
+
+  ## Examples
+
+      iex> Identicon.build_pixel_grid(%Identicon.Image{color: nil, grid: [{46, 1}, {200, 2}, {46, 3}, {178, 6}, {206, 7}, {178, 8}, {228, 11}, {228, 13}, {6, 16}, {6, 18}, {90, 21}, {90, 23}], hex: nil})
+      [{{50, 0}, {100, 50}}, {{100, 0}, {150, 50}}, {{150, 0}, {200, 50}}, {{50, 50}, {100, 100}}, {{100, 50}, {150, 100}}, {{150, 50}, {200, 100}}, {{50, 100}, {100, 150}}, {{150, 100}, {200, 150}}, {{50, 150}, {100, 200}}, {{150, 150}, {200, 200}}, {{50, 200}, {100, 250}}, {{150, 200}, {200, 250}}]
+
+  """
+  def build_pixel_grid(%Identicon.Image{grid: grid} = image) do
+    pixel_map =
+      Enum.map(grid, fn({_code, index}) ->
+        horizontal = rem(index, 5) * 50
+        vertical = div(index, 5) * 50
+
+        top_left = {horizontal, vertical}
+        bottom_right = {horizontal + 50, vertical + 50}
+
+        {top_left, bottom_right}
+      end)
+
+    %Identicon.Image{image | pixel_map: pixel_map}
   end
 
 end
