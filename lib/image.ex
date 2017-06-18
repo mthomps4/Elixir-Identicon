@@ -6,11 +6,15 @@ defmodule Identicon.Image do
   """
 
   @doc """
-    Creates a struct with a property of `hex` with default value of nil to hold list of hash values and a property of `color` to store the RGB color. \n
+    Creates a struct with the following properties:
+
+    - `hex` to hold list of hash values
+    - `color` to store the RGB value
+    - `grid` to store the built indexed grid
     ```
-    %Identicon.Image{color: {145, 46, 200}, hex: [145, 46, 200, 3, 178, 206, 73, 228, 165, 65, 6, 141, 73, 90, 181, 112]}
+    %Identicon.Image{color: ..., hex: ..., grid: ...}
     ```
   """
-  defstruct hex: nil, color: nil
+  defstruct hex: nil, color: nil, grid: nil
 
 end
